@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Outline;
 import android.graphics.Path;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -34,6 +35,9 @@ public class Practice01Translation extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    private int count = SDK_INT > VERSION_CODES.LOLLIPOP ? 6 : 4;
+    private int current = 0;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -49,6 +53,34 @@ public class Practice01Translation extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                switch (current){
+                    case 0:
+                        imageView.animate().translationX(400);
+                        break;
+                    case 1:
+                        imageView.animate().translationX(0);
+                        break;
+                    case 2:
+                        imageView.animate().translationY(300);
+                        break;
+                    case 3:
+                        imageView.animate().translationY(0);
+                        break;
+                    case 4:
+                        if (SDK_INT > VERSION_CODES.LOLLIPOP){
+                            imageView.animate().translationZ(200);
+                        }
+                        break;
+                    case 5:
+                        if (SDK_INT > VERSION_CODES.LOLLIPOP){
+                            imageView.animate().translationZ(0);
+                        }
+                        break;
+                }
+                current++;
+                if (current == count){
+                    current =0;
+                }
             }
         });
     }

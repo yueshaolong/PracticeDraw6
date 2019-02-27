@@ -10,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.hencoder.hencoderpracticedraw6.R;
 
+import static android.os.Build.VERSION.SDK_INT;
+
 public class Practice02Rotation extends RelativeLayout {
     Button animateBt;
     ImageView imageView;
@@ -25,7 +27,7 @@ public class Practice02Rotation extends RelativeLayout {
     public Practice02Rotation(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
+    private int current = 0;
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -37,6 +39,30 @@ public class Practice02Rotation extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // // TODO 在这里处理点击事件，通过 View.animate().rotation/X/Y() 来让 View 旋转
+                switch (current){
+                    case 0:
+                        imageView.animate().rotation(180);
+                        break;
+                    case 1:
+                        imageView.animate().rotation(0);
+                        break;
+                    case 2:
+                        imageView.animate().rotationX(180);
+                        break;
+                    case 3:
+                        imageView.animate().rotationX(0);
+                        break;
+                    case 4:
+                        imageView.animate().rotationY(180);
+                        break;
+                    case 5:
+                        imageView.animate().rotationY(0);
+                        break;
+                }
+                current++;
+                if (current == 6){
+                    current =0;
+                }
             }
         });
     }
